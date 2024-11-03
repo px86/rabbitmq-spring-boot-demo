@@ -1,6 +1,10 @@
 #+TITLE: RabbitMQ Spring-Boot Demo
 #+AUTHOR: Pushkar Raj <px86@protonmail.com>
 
+* How to Run
+
+Make sure you have =docker= and =docker-compose= installed, then run =docker-compose up -d= in the root folder of the project. It will spin up three docker containers - rabbitmq, producer and consumer.
+
 The =producer= exposes an api endpoint for publishing messages onto the queue.
 
 #+begin_src http
