@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:4.0.3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - "rabbitmq-demo-network"
+
+  producer:
+    image: rabbitmq-demo-producer:latest
+    container_name: rabbitmq-demo-producer
+    build:
+      context: ./producer/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - rabbitmq
+    networks:
+      - "rabbitmq-demo-network"
+
+  consumer:
+    image: rabbitmq-demo-consumer:latest
+    container_name: rabbitmq-demo-consumer
+    build:
+      context: ./consumer/
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - rabbitmq
+    networks:
+      - "rabbitmq-demo-network"
+
+networks:
+  rabbitmq-demo-network:
+    name: rabbitmq-demo-network
