@@ -1,1 +1,15 @@
 #+TITLE: RabbitMQ Spring-Boot Demo
+#+AUTHOR: Pushkar Raj <px86@protonmail.com>
+
+The =producer= exposes an api endpoint for publishing messages onto the queue.
+
+#+begin_src http
+  POST http://<producer>/api/v1/publish
+  Content-Type: application/json
+
+  {
+    "body": "hi there!"
+  }
+#+end_src
+
+The =consumer= logs the received message.
